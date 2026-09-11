@@ -4,6 +4,7 @@ let array = [10, 20 , 30, 40, 50];
 
 let user = {
     fullname : "Yavuz Selim Kahraman",
+    age : 30
 };
 
 let [birinci, ikinci, ...others] = array;
