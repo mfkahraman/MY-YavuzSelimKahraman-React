@@ -8,7 +8,7 @@ import { LayoutPage } from "./layouts/layoutPage.jsx";
 import { HomePage } from "./pages/HomePage.jsx";
 
 export default function App() {
-  const [activePage, setActivePage] = useState("default");
+  const [activePage, setActivePage] = useState("Login");
 
   if (activePage == "Login") {
     return <LoginPage></LoginPage>;

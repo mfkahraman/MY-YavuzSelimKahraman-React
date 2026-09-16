@@ -1,4 +1,4 @@
-export function LayoutPage({ children }) {  
+export function LayoutPage({ children }) {
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -30,6 +30,7 @@ export function LayoutPage({ children }) {
                 </a>
               </li>
             </ul>
+            <span class="navbar-text">Navbar text with an inline element</span>
           </div>
         </div>
       </nav>
