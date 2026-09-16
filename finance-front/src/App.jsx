@@ -1,11 +1,30 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import 'bootstrap-icons/font/bootstrap-icons.css';
-import { useState } from 'react';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import "bootstrap-icons/font/bootstrap-icons.css";
+import { useState } from "react";
+import { LoginPage } from "./pages/LoginPage.jsx";
+import { RegisterPage } from "./pages/RegisterPage.jsx";
+import { LayoutPage } from "./layouts/layoutPage.jsx";
+import { HomePage } from "./pages/HomePage.jsx";
 
 export default function App() {
+  const [activePage, setActivePage] = useState("default");
 
-    //Hook 
+  if (activePage == "Login") {
+    return <LoginPage></LoginPage>;
+  }
+
+  if (activePage == "register") {
+    return <RegisterPage></RegisterPage>;
+  }
+
+  return (
+    <LayoutPage>
+      <HomePage></HomePage>
+    </LayoutPage>
+  );
+
+  /*     //Hook 
     const [number, setNumber] = useState(0);
   return (
     <div>
@@ -22,5 +41,5 @@ export default function App() {
             Number is {number}
         </div>
     </div>
-  );
+  ); */
 }

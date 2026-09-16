@@ -1,8 +1,7 @@
 export function HomePage() {
   return (
     <div>
-      <h1>Home Page</h1>
-      <p>Welcome to the Home Page!</p>
+      <p className="lead text-danger">Yavuz hoca ile react bir başka</p>
     </div>
   );
 }
