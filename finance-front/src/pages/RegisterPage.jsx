@@ -1,12 +1,15 @@
 import { useState } from "react";
+import { useParams } from "react-router";
 
-export function RegisterPage({ changeUserName, changeActivePage }) {
+export function RegisterPage() {
   const [registerData, setRegisterData] = useState({
     username: "",
     password: "",
     firstname: "",
     lastname: "",
   });
+
+  const params = useParams();
 
   return (
     <>
@@ -89,8 +92,7 @@ export function RegisterPage({ changeUserName, changeActivePage }) {
               className="btn btn-success mt-3"
               onClick={() => {
                 console.log("registerData", registerData);
-                changeUserName(registerData.username);
-                changeActivePage("default");
+                console.log("params", params);
               }}
             >
               Register

@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
-export function LoginPage({ changeUserName, changeActivePage }) {
+export function LoginPage() {
+  const navigate = useNavigate();
+
   const [loginData, setLoginData] = useState({
     username: "",
     password: "",
@@ -53,8 +56,7 @@ export function LoginPage({ changeUserName, changeActivePage }) {
               className="btn btn-primary mt-3"
               onClick={() => {
                 console.log("loginData", loginData);
-                changeUserName(loginData.username);
-                changeActivePage("default");
+                navigate(`/?name=${loginData.username} & pw= ${loginData.password}`);
               }}
             >
               Login

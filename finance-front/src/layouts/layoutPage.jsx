@@ -1,4 +1,6 @@
-export function LayoutPage({ children, username }) {
+import { Outlet } from "react-router";
+
+export function LayoutPage() {
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -31,10 +33,11 @@ export function LayoutPage({ children, username }) {
               </li>
             </ul>
           </div>
-          <span className="navbar-text">Welcome, {username}!</span>
         </div>
       </nav>
-      <main>{children}</main>
+      <main>
+        <Outlet></Outlet>
+      </main>
     </>
   );
 }
