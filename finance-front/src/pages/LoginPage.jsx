@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function LoginPage() {
+export function LoginPage({ changeUserName, changeActivePage }) {
   const [loginData, setLoginData] = useState({
     username: "",
     password: "",
@@ -53,6 +53,8 @@ export function LoginPage() {
               className="btn btn-primary mt-3"
               onClick={() => {
                 console.log("loginData", loginData);
+                changeUserName(loginData.username);
+                changeActivePage("default");
               }}
             >
               Login

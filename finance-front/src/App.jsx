@@ -8,18 +8,29 @@ import { LayoutPage } from "./layouts/layoutPage.jsx";
 import { HomePage } from "./pages/HomePage.jsx";
 
 export default function App() {
-  const [activePage, setActivePage] = useState("Login");
+  const [activePage, setActivePage] = useState("register");
+  const [username, setUsername] = useState("");
 
-  if (activePage == "Login") {
-    return <LoginPage></LoginPage>;
+  if (activePage == "login") {
+    return (
+      <LoginPage
+        changeUserName={setUsername}
+        changeActivePage={setActivePage}
+      ></LoginPage>
+    );
   }
 
   if (activePage == "register") {
-    return <RegisterPage></RegisterPage>;
+    return (
+      <RegisterPage
+        changeActivePage={setActivePage}
+        changeUserName={setUsername}
+      ></RegisterPage>
+    );
   }
 
   return (
-    <LayoutPage>
+    <LayoutPage username={username}>
       <HomePage></HomePage>
     </LayoutPage>
   );
