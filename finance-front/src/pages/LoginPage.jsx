@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
+import api from "../api/client";
+// import { useAuth } from "../context/AuthContext";
 
 export function LoginPage() {
-  const navigate = useNavigate();
-
+  //   const navigate = useNavigate();
+//   const { isAuth, setIsAuth } = useAuth();
   const [loginData, setLoginData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -18,20 +20,20 @@ export function LoginPage() {
         <div className="w-50 mx-auto mt-5">
           <div className="form-floating mb-3">
             <input
-              name="username"
+              name="email"
               onChange={(e) => {
                 setLoginData((prevState) => ({
                   ...prevState,
-                  username: e.target.value,
+                  email: e.target.value,
                 }));
               }}
-              value={loginData.username}
-              type="text"
+              value={loginData.email}
+              type="email"
               className="form-control"
               id="floatingInput"
-              placeholder="Username"
+              placeholder="Email"
             />
-            <label htmlFor="floatingInput">Username</label>
+            <label htmlFor="floatingInput">Email</label>
           </div>
           <div className="form-floating">
             <input
@@ -57,12 +59,14 @@ export function LoginPage() {
               onClick={() => {
                 console.log("loginData", loginData);
 
-                localStorage.setItem("isAuth", "true");
-                localStorage.setItem("loginData", JSON.stringify(loginData));
-
-                navigate(
-                  `/?name=${loginData.username} & pw= ${loginData.password}`,
-                );
+                api
+                  .post("/auth/login", loginData)
+                  .then((res) => {
+                    console.log("res", res);
+                  })
+                  .catch((err) => {
+                    console.log("err", err);
+                  });
               }}
             >
               Login
