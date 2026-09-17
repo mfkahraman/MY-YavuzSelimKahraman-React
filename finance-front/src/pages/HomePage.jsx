@@ -12,6 +12,8 @@ export function HomePage() {
   console.log("name", name);
   console.log("lastName", lastName);
 
+  console.log("homepageLocalStore", localStorage.getItem("key"));
+
   return (
     <div>
       <p className="lead text-danger">Yavuz hoca ile react bir başka</p>

@@ -1,6 +1,10 @@
 import { Outlet } from "react-router";
+import { NavLink } from "react-router";
 
 export function LayoutPage() {
+  let loginData = localStorage.getItem("loginData");
+  let userData = JSON.parse(loginData);
+
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -33,6 +37,25 @@ export function LayoutPage() {
               </li>
             </ul>
           </div>
+          {userData?.username ? (
+            <>
+              <span className="navbar-text">Hoşgeldin {userData.username}</span>
+              <button
+                className="btn btn-danger ms-3"
+                onClick={() => {
+                  localStorage.removeItem("isAuth");
+                  localStorage.removeItem("loginData");
+                  window.location.href = "/";
+                }}
+              >
+                Çıkış Yap
+              </button>
+            </>
+          ) : (
+            <NavLink to="/login" className="btn btn-primary">
+              Giriş Yap
+            </NavLink>
+          )}
         </div>
       </nav>
       <main>

@@ -56,7 +56,13 @@ export function LoginPage() {
               className="btn btn-primary mt-3"
               onClick={() => {
                 console.log("loginData", loginData);
-                navigate(`/?name=${loginData.username} & pw= ${loginData.password}`);
+
+                localStorage.setItem("isAuth", "true");
+                localStorage.setItem("loginData", JSON.stringify(loginData));
+
+                navigate(
+                  `/?name=${loginData.username} & pw= ${loginData.password}`,
+                );
               }}
             >
               Login

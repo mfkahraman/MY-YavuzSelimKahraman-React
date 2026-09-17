@@ -7,24 +7,31 @@ import { RegisterPage } from "./pages/RegisterPage.jsx";
 import { LayoutPage } from "./layouts/layoutPage.jsx";
 import { HomePage } from "./pages/HomePage.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 const routes = createBrowserRouter([
   {
-    Component: LayoutPage,
+    element: (
+      <>
+        <ProtectedRoute>
+          <LayoutPage username={"furkan"}></LayoutPage>
+        </ProtectedRoute>
+      </>
+    ),
     children: [
       {
         path: "/",
-        Component: HomePage,
+        element: <HomePage />,
       },
     ],
   },
   {
     path: "/register/:id",
-    Component: RegisterPage,
+    element: <RegisterPage />,
   },
   {
     path: "/login",
-    Component: LoginPage,
+    element: <LoginPage />,
   },
 ]);
 
