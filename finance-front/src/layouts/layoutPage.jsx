@@ -1,9 +1,9 @@
 import { Outlet } from "react-router";
 import { NavLink } from "react-router";
+import { useAuth } from "../context/AuthContext";
 
 export function LayoutPage() {
-  let loginData = localStorage.getItem("loginData");
-  let userData = JSON.parse(loginData);
+  const { user, logout } = useAuth();
 
   return (
     <>
@@ -37,17 +37,10 @@ export function LayoutPage() {
               </li>
             </ul>
           </div>
-          {userData?.username ? (
+          {user?.fullName ? (
             <>
-              <span className="navbar-text">Hoşgeldin {userData.username}</span>
-              <button
-                className="btn btn-danger ms-3"
-                onClick={() => {
-                  localStorage.removeItem("isAuth");
-                  localStorage.removeItem("loginData");
-                  window.location.href = "/";
-                }}
-              >
+              <span className="navbar-text">Hoşgeldin {user.fullName}</span>
+              <button className="btn btn-danger ms-3" onClick={logout}>
                 Çıkış Yap
               </button>
             </>

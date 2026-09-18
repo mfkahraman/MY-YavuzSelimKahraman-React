@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { useParams } from "react-router";
+import api from "../api/client";
+import {useNavigate} from "react-router"
 
 export function RegisterPage() {
   const [registerData, setRegisterData] = useState({
-    username: "",
+    fullName: "",
+    email: "",
     password: "",
-    firstname: "",
-    lastname: "",
   });
 
-  const params = useParams();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -20,54 +20,37 @@ export function RegisterPage() {
         <div className="w-50 mx-auto mt-5">
           <div className="form-floating mb-3">
             <input
-              name="firstname"
+              name="fullname"
               onChange={(e) => {
                 setRegisterData((prevState) => ({
                   ...prevState,
-                  firstname: e.target.value,
+                  fullName: e.target.value,
                 }));
               }}
-              value={registerData.firstname}
+              value={registerData.fullName}
               type="text"
               className="form-control"
               id="floatingInput"
-              placeholder="Firstname"
+              placeholder="Fullname"
             />
-            <label htmlFor="floatingInput">Firstname</label>
+            <label htmlFor="floatingInput">Fullname</label>
           </div>
           <div className="form-floating mb-3">
             <input
-              name="lastname"
+              name="email"
               onChange={(e) => {
                 setRegisterData((prevState) => ({
                   ...prevState,
-                  lastname: e.target.value,
+                  email: e.target.value,
                 }));
               }}
-              value={registerData.lastname}
-              type="text"
+              value={registerData.email}
+              type="email"
               className="form-control"
               id="floatingInput"
-              placeholder="Lastname"
+              placeholder="Email"
             />
-            <label htmlFor="floatingInput">Lastname</label>
-          </div>
-          <div className="form-floating mb-3">
-            <input
-              name="username"
-              onChange={(e) => {
-                setRegisterData((prevState) => ({
-                  ...prevState,
-                  username: e.target.value,
-                }));
-              }}
-              value={registerData.username}
-              type="text"
-              className="form-control"
-              id="floatingInput"
-              placeholder="Username"
-            />
-            <label htmlFor="floatingInput">Username</label>
+            <label htmlFor="floatingInput">Email</label>
           </div>
           <div className="form-floating">
             <input
@@ -90,9 +73,13 @@ export function RegisterPage() {
             <button
               type="button"
               className="btn btn-success mt-3"
-              onClick={() => {
-                console.log("registerData", registerData);
-                console.log("params", params);
+              onClick={async () => {
+                try {
+                  await api.post("/auth/register", registerData);
+                  navigate("/login");
+                } catch (error) {
+                  console.log("Register error:", error);
+                }
               }}
             >
               Register

@@ -1,11 +1,10 @@
 import { useState } from "react";
-// import { useNavigate } from "react-router";
 import api from "../api/client";
-// import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 export function LoginPage() {
-  //   const navigate = useNavigate();
-//   const { isAuth, setIsAuth } = useAuth();
+  const {  login } = useAuth();
+  const [error, setError] = useState("");
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -52,25 +51,35 @@ export function LoginPage() {
             />
             <label htmlFor="floatingPassword">Password</label>
           </div>
-          <div>
+          <div className="pt-4">
             <button
               type="button"
               className="btn btn-primary mt-3"
-              onClick={() => {
+              onClick={async () => {
                 console.log("loginData", loginData);
-
-                api
-                  .post("/auth/login", loginData)
-                  .then((res) => {
-                    console.log("res", res);
-                  })
-                  .catch((err) => {
-                    console.log("err", err);
-                  });
+                try {
+                  const response = await api.post("/auth/login", loginData);
+                  login(response.data);
+                  console.log("response", response.data);
+                  // Handle successful login, e.g., store token, redirect, etc.
+                } catch (error) {
+                  console.log("error:", error);
+                  setError("Kullanici veya sifre hatali");
+                  setTimeout(() => {
+                    setError("Kullanici adı veya sifre hatali");
+                  }, 3000);
+                }
               }}
             >
               Login
             </button>
+            <div className="text-center text-danger">
+              {error && (
+                <div className="alert alert-danger mt-3" role="alert">
+                  Bir hata oluştur: {error}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
